@@ -9,7 +9,7 @@
 
 using namespace std;
 
-extern "C" int DoIt()
+/*extern "C" int DoIt()
 {
     RF24* radio = new RF24(RPI_V2_GPIO_P1_22,BCM2835_SPI_CS0, BCM2835_SPI_SPEED_8MHZ);
 // Setup and configure rf radio
@@ -42,7 +42,7 @@ printf("Now sending...\n");
                         }
 
         return 29;
-}
+}*/
 
 /*
 Creates a new RF24 instance.

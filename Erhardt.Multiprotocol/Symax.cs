@@ -21,8 +21,9 @@
 
 using System;
 using System.Diagnostics;
+using Erhardt.RF24;
 
-namespace Erhardt.RF24
+namespace Erhardt.Multiprotocol
 {
     public class Symax
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Erhardt.Multiprotocol;
 using Erhardt.RF24;
 
 namespace ConsoleApplication
@@ -22,22 +22,30 @@ namespace ConsoleApplication
 
         public static void Main(string[] args)
         {
-            MainAsync().Wait();
+            try
+            {
+                SampleSymax();
+                //SampleRadioAsync().Wait();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
-        private static async Task MainAsync()
+        private static void SampleSymax()
         {
-            try{
             Symax symax = new Symax();
             Console.WriteLine("pairing");
             symax.Pair();
             Console.WriteLine("flying");
             symax.Fly(2);
+        }
 
-            // Console.WriteLine("Hello DoIt!");
-            // Console.WriteLine(DoIt());
-            System.Console.WriteLine(DelayTime);
-            System.Console.WriteLine("TicksPerMicrosecond: " + TicksPerMicrosecond);
+        private static async Task SampleRadioAsync()
+        {
+            Console.WriteLine(DelayTime);
+            Console.WriteLine("TicksPerMicrosecond: " + TicksPerMicrosecond);
 
             Console.WriteLine("Hello Radio!");
             using (Radio myRF24 = new Radio(25, 0, 32))
@@ -60,17 +68,17 @@ namespace ConsoleApplication
                 myRF24.OpenWritingPipe(new byte[] { 0xF0, 0xF0, 0xF0, 0xF0, 0xE1 });
                 myRF24.PrintDetails();
 
-                System.Console.WriteLine("Now Sending...");
+                Console.WriteLine("Now Sending...");
                 if (myRF24.Write(new byte[] { 0x55, 0xAA }))
                 {
-                    System.Console.WriteLine("Send successful");
+                    Console.WriteLine("Send successful");
                 }
                 else
-                    System.Console.WriteLine("Send failed");
+                    Console.WriteLine("Send failed");
 
                 //while (true)
                 {
-                    System.Console.WriteLine("...");
+                    Console.WriteLine("...");
 
                     int[] values = new int[numChannels];
 
@@ -107,14 +115,6 @@ namespace ConsoleApplication
                     }
                 }
             }
-            }
-            catch (Exception e)
-            {
-                System.Console.WriteLine(e);
-            }
         }
-
-        [DllImport("Erhardt.RF24Lib.so")]
-        private static extern int DoIt();
     }
 }
