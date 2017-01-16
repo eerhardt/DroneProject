@@ -1,12 +1,24 @@
-﻿# g++ -g -shared -fPIC rf24lib.cpp -o Erhardt.RF24Lib.so -lrf24
+cmake_minimum_required(VERSION 2.8)
+project(Erhardt.RF24Lib)
 
-find_package(RF24)
+set(CMAKE_INSTALL_PREFIX ../../bin)
+set(CMAKE_SHARED_LIBRARY_PREFIX "")
+add_definitions(-std=c++11)
 
-#FIND_PATH(NRF24_INCLUDE_DIR
-#NAMES RF24.h nRF24L01.h
-#PATHS /usr/include/nrf24 /usr/include/linux/nrf24 /usr/local/include
-#)
+include_directories(/usr/local/include)
 
-#include_directories(${NRF24_INCLUDE_DIR})
+FIND_LIBRARY(NRF24_LIBRARY
+    NAMES rf24
+    PATHS /usr/lib /usr/local/lib
+)
 
-add_library (Erhardt.RF24Lib pal_rf24lib.cpp)
+add_library (Erhardt.RF24Lib
+    SHARED
+    pal_rf24lib.cpp
+)
+
+target_link_libraries(Erhardt.RF24Lib
+     ${NRF24_LIBRARY}
+)
+
+install (TARGETS Erhardt.RF24Lib DESTINATION .)
