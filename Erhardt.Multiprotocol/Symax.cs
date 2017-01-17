@@ -28,9 +28,9 @@ namespace Erhardt.Multiprotocol
     public class Symax
     {
         private const int SYMAX_BIND_COUNT = 345;
-        private const int SYMAX_INITIAL_WAIT = 500;
-        private const int SYMAX_FIRST_PACKET_DELAY = 12000;
-        private const int SYMAX_PACKET_PERIOD = 4000; // Timeout for callback in uSec
+        private const int SYMAX_INITIAL_WAIT = 500 * 2;
+        private const int SYMAX_FIRST_PACKET_DELAY = 12000 * 2;
+        private const int SYMAX_PACKET_PERIOD = 4000 * 2; // Timeout for callback in uSec
 
         private Radio radio;
         private byte[] rx_tx_addr;
@@ -70,8 +70,6 @@ namespace Erhardt.Multiprotocol
 
         private byte[] BuildBindPacket()
         {
-            System.Console.WriteLine("BuildBindPacket");
-            
             byte[] packet = new byte[10];
             packet[0] = rx_tx_addr[4];
             packet[1] = rx_tx_addr[3];
@@ -91,7 +89,6 @@ namespace Erhardt.Multiprotocol
             byte throttle, byte elevator, byte rudder, byte aileron,
             bool video, bool picture, bool flip, bool headless)
         {
-            System.Console.WriteLine("BuildDataPacket");
             byte[] packet = new byte[10];
             packet[0] = throttle;
             packet[1] = elevator;
@@ -109,8 +106,6 @@ namespace Erhardt.Multiprotocol
 
         private void SendPacket(byte[] packet)
         {
-            System.Console.WriteLine("SendPacket");
-            
             radio.Channel = hopping_frequency[hopping_frequency_no];
             if (!radio.Write(packet))
             {
@@ -123,8 +118,8 @@ namespace Erhardt.Multiprotocol
 
         public void Fly(int seconds)
         {
-            System.Console.WriteLine("Fly");
-            byte throttle = 2;
+            Console.WriteLine("Fly");
+            byte throttle = 84;
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
@@ -133,14 +128,57 @@ namespace Erhardt.Multiprotocol
                 var packet = BuildDataPacket(throttle, 128, 128, 128, false, false, false, false);
                 SendPacket(packet);
 
-                throttle = 100;// (byte)(((throttle + 1) % 10) + 50);
                 delay(SYMAX_PACKET_PERIOD);
             }
+
+            Console.WriteLine("Spinning");
+            watch.Restart();
+
+            while (watch.Elapsed.TotalSeconds < seconds)
+            {
+                var packet = BuildDataPacket(throttle, 128, 127, 128, false, false, false, false);
+                SendPacket(packet);
+
+                delay(SYMAX_PACKET_PERIOD);
+            }
+
+            watch.Restart();
+
+            while (watch.Elapsed.TotalSeconds < seconds)
+            {
+                var packet = BuildDataPacket(throttle, 128, 128, 128, false, false, false, false);
+                SendPacket(packet);
+
+                delay(SYMAX_PACKET_PERIOD);
+            }
+
+            Console.WriteLine("Spinning other way");
+            watch.Restart();
+
+            while (watch.Elapsed.TotalSeconds < seconds)
+            {
+                var packet = BuildDataPacket(throttle, 128, 255, 128, false, false, false, false);
+                SendPacket(packet);
+
+                delay(SYMAX_PACKET_PERIOD);
+            }
+
+            watch.Restart();
+            throttle = 0;
+
+            while (watch.Elapsed.TotalSeconds < seconds)
+            {
+                var packet = BuildDataPacket(throttle, 128, 128, 128, false, false, false, false);
+                SendPacket(packet);
+
+                delay(SYMAX_PACKET_PERIOD);
+            }
+
         }
 
         public void Pair()
         {
-            System.Console.WriteLine("Pair");
+            Console.WriteLine("Pair");
             // initSymax()
             radio = new Radio(25, 0, 32);
             radio.Begin();
@@ -150,7 +188,6 @@ namespace Erhardt.Multiprotocol
             radio.SetRetries(15, 15);
             radio.Channel = 0x08;
 
-            System.Console.WriteLine("SetDataRate");
             radio.SetDataRate(DataRate.TwoHundredFiftyKBPS);
 
             // not setting any read pipes -- is this a problem?
