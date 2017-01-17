@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(Erhardt.RF24Lib)
+project(Erhardt.RF24Lib.Native)
 
 set(CMAKE_INSTALL_PREFIX ../../bin)
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
@@ -12,13 +12,13 @@ FIND_LIBRARY(NRF24_LIBRARY
     PATHS /usr/lib /usr/local/lib
 )
 
-add_library (Erhardt.RF24Lib
+add_library (Erhardt.RF24Lib.Native
     SHARED
     pal_rf24lib.cpp
 )
 
-target_link_libraries(Erhardt.RF24Lib
+target_link_libraries(Erhardt.RF24Lib.Native
      ${NRF24_LIBRARY}
 )
 
-install (TARGETS Erhardt.RF24Lib DESTINATION .)
+install (TARGETS Erhardt.RF24Lib.Native DESTINATION .)
