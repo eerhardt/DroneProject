@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27806.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SampleApp", "SampleApp\SampleApp.xproj", "{D96C3418-AB61-4918-9689-B698664053B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleApp", "SampleApp\SampleApp.csproj", "{D96C3418-AB61-4918-9689-B698664053B4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Erhardt.Multiprotocol", "Erhardt.Multiprotocol\Erhardt.Multiprotocol.xproj", "{6E5A4037-2A6C-4132-8B15-259FA48493F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Erhardt.Multiprotocol", "Erhardt.Multiprotocol\Erhardt.Multiprotocol.csproj", "{6E5A4037-2A6C-4132-8B15-259FA48493F6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Erhardt.RF24", "Erhardt.RF24\Erhardt.RF24.xproj", "{A51C019E-4A70-478B-9999-C362DAA0DDE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Erhardt.RF24", "Erhardt.RF24\Erhardt.RF24.csproj", "{A51C019E-4A70-478B-9999-C362DAA0DDE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1B1F0B3-449A-4426-AD1D-F8E028D214BE}
 	EndGlobalSection
 EndGlobal
