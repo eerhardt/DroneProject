@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Erhardt.Multiprotocol", "Er
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Erhardt.RF24", "Erhardt.RF24\Erhardt.RF24.csproj", "{A51C019E-4A70-478B-9999-C362DAA0DDE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpioSampleApp", "GpioSampleApp\GpioSampleApp.csproj", "{E29C0B11-AF43-4878-9C93-30FBDAEB41A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A51C019E-4A70-478B-9999-C362DAA0DDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A51C019E-4A70-478B-9999-C362DAA0DDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A51C019E-4A70-478B-9999-C362DAA0DDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29C0B11-AF43-4878-9C93-30FBDAEB41A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29C0B11-AF43-4878-9C93-30FBDAEB41A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29C0B11-AF43-4878-9C93-30FBDAEB41A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29C0B11-AF43-4878-9C93-30FBDAEB41A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
